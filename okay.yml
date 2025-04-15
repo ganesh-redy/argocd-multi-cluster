@@ -12,7 +12,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: https://github.com/my-repo.git
+        repoURL: https://github.com/ganesh-redy/argocd-multi-cluster.git
         path: "{{appName}}"
       destination:
         server: "{{cluster.server}}"
