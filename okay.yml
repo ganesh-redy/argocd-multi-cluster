@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: multi-cluster-apps
+  namespace: argocd
+spec:
+  generators:
+  - clusters: {}
+  template:
+    metadata:
+      name: "{{cluster.name}}-app"
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/my-repo.git
+        path: "{{appName}}"
+      destination:
+        server: "{{cluster.server}}"
+        namespace: default
+      syncPolicy:
+        automated:
+          prune: true      # Automatically prune resources no longer in Git
+          selfHeal: true   # Automatically fix any discrepancies between desired and actual state
+
